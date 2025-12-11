@@ -19,8 +19,8 @@ df[['age', 'years-of-education', 'hours-per-week']].describe()
 
 for col in ['workclass', 'education', 'marital-status',
             'occupation', 'race', 'sex', 'native-country']:
-    print(col)
-    print(df[col].value_counts().head())
+    #print(col)
+    print(df[col].value_counts().head().to_string())
     print()
     
 df.isna().sum()
@@ -45,8 +45,6 @@ preprocess = ColumnTransformer(
         ('num', 'passthrough', numeric_features)])
 
 
-
-
 from sklearn.model_selection import train_test_split
 
 X = df[numeric_features + categorical_features]
@@ -62,6 +60,13 @@ rf_clf = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
 clf = Pipeline(steps=[('preprocess', preprocess), ('model', rf_clf)])
 
 clf.fit(X_train, y_train)
+
+
+from sklearn.metrics import classification_report, confusion_matrix
+y_pred = clf.predict(X_test)
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred, digits=3))
+
 
 
 
