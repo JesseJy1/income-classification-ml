@@ -95,8 +95,8 @@ search = RandomizedSearchCV(
 
 search.fit(X_train, y_train)
 
-print(search.best_params_)
-print(search.best_score_)
+#print(search.best_params_)
+#print(search.best_score_)
 
 best_clf = search.best_estimator_
 
@@ -104,6 +104,21 @@ y_pred_best = best_clf.predict(X_test)
 
 print(confusion_matrix(y_test, y_pred_best))
 print(classification_report(y_test, y_pred_best, digits=3))
+
+
+ohe = best_clf.named_steps['preprocess'].named_transformers_['cat']
+cat_feature_names = ohe.get_feature_names_out(categorical_features)
+
+all_feature_names = list(cat_feature_names) + numeric_features
+
+importances = best_clf.named_steps['model'].feature_importances_
+
+feat_imp = pd.Series(importances, index=all_feature_names).sort_values(ascending=False)
+
+print(feat_imp.head(20))
+
+
+
 
 
 
