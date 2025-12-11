@@ -68,6 +68,33 @@ print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred, digits=3))
 
 
+from sklearn.model_selection import RandomizedSearchCV
+import numpy as np
+
+param_distributions = {
+    'model__n_estimators': [100, 200, 300],
+    'model__max_depth': [None, 5, 10, 20],
+    'model__min_samples_split': [2, 5, 10],
+    'model__min_samples_leaf': [1, 2, 4],
+    'model__max_features': ['sqrt', 'log2'],
+    'model__class_weight': [None, 'balanced']
+}
+
+search = RandomizedSearchCV(
+    clf,
+    param_distributions=param_distributions,
+    n_iter=20,
+    scoring='f1',           # 这里用F1作为调参目标
+    cv=5,
+    n_jobs=-1,
+    random_state=42
+)
+
+search.fit(X_train, y_train)
+
+print(search.best_params_)
+print(search.best_score_)
+
 
 
 
