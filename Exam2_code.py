@@ -47,3 +47,25 @@ preprocess = ColumnTransformer(
 
 
 
+from sklearn.model_selection import train_test_split
+
+X = df[numeric_features + categorical_features]
+y = df['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, 
+                                                    stratify = y, random_state =42)
+
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+
+rf_clf = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
+clf = Pipeline(steps=[('preprocess', preprocess), ('model', rf_clf)])
+
+clf.fit(X_train, y_train)
+
+
+
+
+
+
+
