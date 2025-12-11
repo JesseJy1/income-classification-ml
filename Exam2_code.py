@@ -42,7 +42,8 @@ from sklearn.preprocessing import OneHotEncoder
 
 preprocess = ColumnTransformer(
     transformers=[('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features),
-        ('num', 'passthrough', numeric_features)])
+                  ('num', 'passthrough', numeric_features)]
+    )
 
 
 from sklearn.model_selection import train_test_split
@@ -50,8 +51,10 @@ from sklearn.model_selection import train_test_split
 X = df[numeric_features + categorical_features]
 y = df['target']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, 
-                                                    stratify = y, random_state =42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, 
+                                                    test_size=0.2, 
+                                                    stratify = y, 
+                                                    random_state =42)
 
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
@@ -84,7 +87,7 @@ search = RandomizedSearchCV(
     clf,
     param_distributions=param_distributions,
     n_iter=20,
-    scoring='f1',           # 这里用F1作为调参目标
+    scoring='f1',
     cv=5,
     n_jobs=-1,
     random_state=42
@@ -94,6 +97,13 @@ search.fit(X_train, y_train)
 
 print(search.best_params_)
 print(search.best_score_)
+
+best_clf = search.best_estimator_
+
+y_pred_best = best_clf.predict(X_test)
+
+print(confusion_matrix(y_test, y_pred_best))
+print(classification_report(y_test, y_pred_best, digits=3))
 
 
 
