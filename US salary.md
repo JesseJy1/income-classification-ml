@@ -213,3 +213,11 @@ The model effectively identifies high-income groups, showing significant improve
 
 * Determine if more data is needed to improve model performance
 
+
+reference:
+https://ml.auc-computing.nl/20251103.html
+
+https://git.auc-computing.nl/bon/exam1/src/branch/main/housing.org#headline-1
+
+https://chatgpt.com/share/693a93af-a5e0-8011-b60e-a7bfadf611ca
+
