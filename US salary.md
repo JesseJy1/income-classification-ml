@@ -95,7 +95,7 @@ print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred, digits=3))
 ```
 output：
-![](US%20salary/%E6%88%AA%E5%B1%8F2025-12-11%2010.35.00.png)
+![Baseline Results](images/baseline_results.png)
 The overall accuracy is 0.780.
 This indicates:
 * The model performs well in predicting the majority class (<50k)
@@ -143,7 +143,7 @@ search.fit(X_train, y_train)
 ## 10. Performance of best model
 I retested the model with the optimized hyperparameters and obtained the following output:
 
-![](US%20salary/%E6%88%AA%E5%B1%8F2025-12-11%2010.40.38.png)
+![Tuned Results](images/tuned_results.png)
 total accuracy：0.789
 Weighted F1: 0.801
 
@@ -156,7 +156,7 @@ This indicates:
 ## 11. Feature Importance
 
 The top 20 most important features are:
-![](US%20salary/%E6%88%AA%E5%B1%8F2025-12-11%2010.43.06.png)
+![Feature Importance](images/feature_importance.png)
 
 ### **Interpretation**
 
@@ -213,11 +213,4 @@ The model effectively identifies high-income groups, showing significant improve
 
 * Determine if more data is needed to improve model performance
 
-
-reference:
-https://ml.auc-computing.nl/20251103.html
-
-https://git.auc-computing.nl/bon/exam1/src/branch/main/housing.org#headline-1
-
-https://chatgpt.com/share/693a93af-a5e0-8011-b60e-a7bfadf611ca
 
